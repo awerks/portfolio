@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block title %}Subtitles Generator Bot{% endblock %}
+
+{% block content %}
+
+<section class="content-box-area mt-4">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-xl-4">
+                {%include 'profileblock.html' %}
+            </div>
+            <div class="col-xl-8">
+                <div class="card content-box-card">
+                    <div class="card-body portfolio-card">
+                        <div class="portfolio-details-area">
+                            <div class="main-image">
+                                <img src="../assets/img/projects/1/1.webp" alt="Subtitles Generator Bot Interface">
+                            </div>
+                            <div class="portfolio-details-text">
+                                <div class="short-info">
+                                    <div class="info-item">
+                                        <p class="subtitle">Project:</p>
+                                        <h4 class="card-title">Subtitles Generator Bot</h4>
+                                    </div>
+                                    <div class="info-item">
+                                        <p class="subtitle">Core Functionality:</p>
+                                        <h4 class="card-title">Transcription</h4>
+                                        <a class="website">https://captionyx.com</a>
+                                    </div>
+                                    <div class="info-item">
+                                        <img src="../assets/img/projects/1/3.webp" alt="Bot Transcription Example">
+                                    </div>
+                                </div>
+                                <div class="overview">
+                                    <h4 class="card-title">How the Bot Works</h4>
+                                    <p>The Subtitles Generator bot operates through a series of steps to download,
+                                        transcribe, and process video subtitles via a user-friendly Telegram interface.
+                                    </p>
+
+                                    <p><b>User Interaction & Control:</b> Users interact with the bot using Telegram
+                                        commands to initiate tasks and receive updates. The bot provides options for
+                                        downloading videos, transcribing them, and generating subtitles.</p>
+
+                                    <p><b>Video Downloading:</b> Leveraging `yt_dlp`, the bot downloads videos from
+                                        various platforms. Users can customize download options like quality and format,
+                                        receiving real-time progress updates.</p>
+
+                                    <p><b>AI-Powered Transcription:</b> Once downloaded, the bot uses sophisticated
+                                        transcription models (e.g., `victor-upmeet/whisperx`) to convert audio into text
+                                        accurately. Users can set duration limits for transcription.</p>
+
+                                    <p><b>Subtitle Generation & Output:</b> Subtitles are generated from the transcribed
+                                        text. Users can choose to receive subtitle files (.srt, .vtt) or have them baked
+                                        directly into the video.</p>
+
+                                    <p><b>Cloud Integration (AWS):</b> The bot seamlessly integrates with AWS S3 for
+                                        storing videos and subtitles, configured via environment variables. It can also
+                                        generate secure access URLs using AWS CloudFront.</p>
+
+                                    <p><b>Notifications & Payments:</b> The bot supports email notifications for task
+                                        completion and integrates with Telegram's payment system for potential premium
+                                        features, configured via environment variables.</p>
+
+                                    <p><b>Setup & Configuration:</b> Running the bot requires a local `telegram-bot-api`
+                                        server and setting environment variables (bot token, AWS keys, email settings,
+                                        etc.). Key parameters are managed in configuration files like `download.py`.</p>
+                                </div>
+                            </div>
+
+                            <div class="more-info-block">
+                                <h3 class="more-info-title">Challenges & Solutions</h3>
+                                <p>Developing a robust Subtitles Generator Bot involves tackling various technical and
+                                    operational challenges. Key areas include ensuring accuracy, reliability, and
+                                    scalability while managing costs and user experience.</p>
+
+                                <h5 class="more-info-subtitle">Transcription Accuracy:</h5>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <b>Challenge:</b> Achieving high accuracy in transcription, especially with
+                                        noisy audio, different accents, or specialized terminology. Model limitations
+                                        can affect output quality.
+                                    </li>
+                                    <li>
+                                        <b>Solution:</b> Utilizing state-of-the-art transcription models (like
+                                        WhisperX), potentially offering model choices, and implementing post-processing
+                                        steps. Exploring options for user-guided correction could further enhance
+                                        accuracy.
+                                    </li>
+                                </ul>
+
+                                <h5 class="more-info-subtitle">Download Reliability & Platform Compatibility:</h5>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <b>Challenge:</b> Video downloads can fail due to network issues, platform
+                                        restrictions (like YouTube changes), or unsupported formats. `yt_dlp` requires
+                                        frequent updates.
+                                    </li>
+                                    <li>
+                                        <b>Solution:</b> Implementing robust error handling, retry mechanisms for
+                                        downloads, keeping `yt_dlp` updated, and providing clear feedback to the user on
+                                        download failures.
+                                    </li>
+                                </ul>
+
+                                <h5 class="more-info-subtitle">Resource Management & Scalability:</h5>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <b>Challenge:</b> Downloading and transcribing videos are resource-intensive
+                                        tasks (CPU, memory, network). Handling multiple concurrent users requires
+                                        careful management to avoid bottlenecks and high costs (especially cloud
+                                        resources).
+                                    </li>
+                                    <li>
+                                        <b>Solution:</b> Implementing efficient job queuing systems, optimizing resource
+                                        usage during processing, setting appropriate limits (e.g., transcription
+                                        duration), and potentially using scalable cloud infrastructure (like AWS
+                                        auto-scaling or serverless functions).
+                                    </li>
+                                </ul>
+
+                                <h5 class="more-info-subtitle">API Limits & Cost Control:</h5>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <b>Challenge:</b> External services (Telegram API, AWS S3/CloudFront,
+                                        Transcription APIs if used, Email providers) often have usage limits and
+                                        associated costs. Uncontrolled usage can lead to service interruptions or
+                                        unexpected bills.
+                                    </li>
+                                    <li>
+                                        <b>Solution:</b> Implementing rate limiting, monitoring usage dashboards (AWS
+                                        Cost Explorer), optimizing data transfer/storage, using efficient transcription
+                                        models, and potentially incorporating the payment system for heavy usage tiers.
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                            <div class="prev-and-next-btn">
+                                <a href="/project-details/{{ next_project | default('#') }}" class="btn btn-next">
+                                    Next
+                                </a>
+                                <a href="/project-details/{{ previous_project | default('#') }}" class="btn btn-prev">
+                                    Previous
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="work-together-slider">
+                            <div class="slider-main d-flex gap-4 align-items-center">
+                                <div class="slider-item">
+                                    <a href="/contact">Let's 👋 Work Together</a>
+                                    <a href="/contact">Let's 👋 Work Together</a>
+                                </div>
+                                <div class="slider-item">
+                                    <a href="/contact">Let's 👋 Work Together</a>
+                                    <a href="/contact">Let's 👋 Work Together</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+*.pdf
+__pychache__/
+*.pyc
+*.pyo
+*.pyd
+.vscode/
+__pychache__/
