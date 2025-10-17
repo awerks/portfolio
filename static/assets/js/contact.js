@@ -13,13 +13,11 @@ contactForm.addEventListener("submit", async function (e) {
     if (submitButton) submitButton.disabled = true;
 
     const formData = new FormData(contactForm);
-    const jsonData = JSON.stringify(Object.fromEntries(formData));
 
     try {
-        const response = await fetch("https://contact.illiashust.com/telegram/send", {
+        const response = await fetch("/contact", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: jsonData,
+            body: formData,
         });
 
         if (response.ok) {

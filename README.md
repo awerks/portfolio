@@ -36,12 +36,6 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-or simply
-
-```bash
-python main.py
-```
-
 ## Usage
 
 ### Adding a New Project

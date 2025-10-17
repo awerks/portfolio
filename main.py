@@ -24,7 +24,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 @app.exception_handler(RateLimitExceeded)
-async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
+async def rate_limit_handler():
     return PlainTextResponse("Rate limit exceeded. Please try again later.", status_code=429)
 
 
@@ -39,7 +39,7 @@ async def services():
 
 
 @app.get("/contact")
-async def contact():
+async def contact_page():
     return templates.TemplateResponse("contact.html", {"request": {}, "active_page": "contact"})
 
 
@@ -68,35 +68,35 @@ async def project_details(request: Request, project_id: int):
     )
 
 
-# @app.post("/contact")
-# @limiter.limit("5/minute")
-# async def contact(request: Request, data: Annotated[ContactForm, Form()]):
+@app.post("/contact")
+@limiter.limit("5/minute")
+async def contact(request: Request, data: Annotated[ContactForm, Form()]):
 
-#     telegram_api_url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    telegram_api_url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
-#     telegram_message = f"""
+    telegram_message = f"""
+`
+    New contact form submission:
 
-#     New contact form submission:
+    Name: {data.name}
+    Email: {data.email}
+    Message: {data.message}
+    Subject: {data.subject}
 
-#     Name: {data.name}
-#     Email: {data.email}
-#     Message: {data.message}
-#     Subject: {data.subject}
+    """
 
-#     """
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            telegram_api_url,
+            data={
+                "chat_id": CHAT_ID,
+                "text": telegram_message,
+            },
+        )
+    if response.status_code != 200:
+        return {"ok": False, "error": "Failed to send message."}
 
-#     async with httpx.AsyncClient() as client:
-#         response = await client.post(
-#             telegram_api_url,
-#             data={
-#                 "chat_id": CHAT_ID,
-#                 "text": telegram_message,
-#             },
-#         )
-#     if response.status_code != 200:
-#         return PlainTextResponse("Failed to send message.", status_code=500)
-
-#     return PlainTextResponse("Message sent successfully", status_code=200)
+    return {"ok": True, "message": "Message sent successfully."}
 
 
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
