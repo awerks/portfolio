@@ -1,21 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %}Photography Portfolio{% endblock %} {% block content %}
 
-{% block title %}Photography Portfolio{% endblock %}
-
-{% block content %}
-
-<section class="content-box-area mt-4">
+<section class="mt-4 content-box-area">
     <div class="container">
         <div class="row g-4">
-            <div class="col-xl-4">
-                {%include 'profileblock.html' %}
-            </div>
+            <div class="col-xl-4">{%include 'profileblock.html' %}</div>
             <div class="col-xl-8">
-                <div class="card content-box-card">
+                <div class="content-box-card card">
                     <div class="card-body portfolio-card">
                         <div class="portfolio-details-area">
                             <div class="main-image">
-                                <img src="../assets/img/projects/3/1.webp" alt="Photography Portfolio Homepage">
+                                <img
+                                    src="../assets/img/projects/3/1.webp"
+                                    alt="Photography Portfolio Homepage" />
                             </div>
                             <div class="portfolio-details-text">
                                 <div class="short-info">
@@ -26,121 +22,46 @@
                                     <div class="info-item">
                                         <p class="subtitle">Built With:</p>
                                         <h4 class="card-title">HTML, CSS, JavaScript, Tailwind CSS</h4>
-                                        <a href="https://photo.illiashust.com" class="website"></a>
+                                        <a
+                                            href="https://photo.illiashust.com"
+                                            class="website"></a>
                                     </div>
                                 </div>
                                 <div class="overview">
                                     <h4 class="card-title">Overview</h4>
-                                    <p>This project is a web-based portfolio designed specifically to showcase personal
-                                        photography work in a visually appealing and organized manner. It serves as an
-                                        online gallery for potential clients, collaborators, or enthusiasts to view the
-                                        photographer's style and capabilities.</p>
                                     <p>
-                                        Built using fundamental web technologies (<b>HTML</b> for structure, <b>CSS</b>
-                                        for base styling, and <b>JavaScript</b> for interactivity), the project heavily
-                                        leverages <b>Tailwind CSS</b> for rapid, utility-first styling, ensuring a clean
-                                        and modern look.
+                                        This project is a web-based portfolio designed specifically to showcase personal
+                                        photography work in a visually appealing and organized manner.
                                     </p>
-                                    <p>Key third-party tools like <b>FancyBox</b> are integrated for enhanced image
+                                    <p>
+                                        The project heavily uses
+                                        <b>Tailwind CSS</b> for rapid, utility-first styling.
+                                    </p>
+                                    <p>
+                                        Key third-party tools like <b>FancyBox</b> are integrated for enhanced image
                                         viewing (lightbox galleries), <b>jQuery</b> supports some JavaScript
-                                        interactions, and <b>Google Fonts</b> are used for refined typography,
-                                        contributing to the overall professional aesthetic.</p>
+                                        interactions, and <b>Google Fonts</b> are used for refined typography.
+                                    </p>
                                 </div>
                             </div>
 
-                            <div class="more-info-block">
-                                <h3 class="more-info-title">Challenges & Solutions</h3>
-                                <p>Creating an effective photography portfolio involves specific challenges related to
-                                    visual presentation, performance, and user experience.</p>
-
-                                <h5 class="more-info-subtitle">Image Optimization & Performance:</h5>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <b>Challenge:</b> Displaying high-quality images without negatively impacting
-                                        page load speed. Large image files are essential for detail but can slow down
-                                        the website significantly.
-                                    </li>
-                                    <li>
-                                        <b>Solution:</b> Implemented techniques like responsive images (`srcset`), lazy
-                                        loading for images below the fold, using modern formats (e.g., WebP where
-                                        supported), and optimizing images during the build process or via server
-                                        configuration.
-                                    </li>
-                                </ul>
-                                <h5 class="more-info-subtitle">Responsive Design for Galleries:
-                                </h5>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <b>Challenge:</b> Ensuring that image galleries and individual photos look great
-                                        and function correctly across a wide range of devices, from large desktops to
-                                        small mobile screens.
-                                    </li>
-                                    <li>
-                                        <b>Solution:</b> Utilized Tailwind CSS's responsive utility classes extensively
-                                        to create flexible grid layouts and ensure images scale appropriately. Tested
-                                        layouts across multiple viewport sizes.
-                                    </li>
-                                </ul>
-
-                                <h5 class="more-info-subtitle">Engaging Image Presentation (UX):
-                                </h5>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <b>Challenge:</b> Providing an intuitive and engaging way for users to browse
-                                        photos, view them in detail, and navigate between images or galleries.
-                                    </li>
-                                    <li>
-                                        <b>Solution:</b> Integrated the FancyBox library to provide a feature-rich
-                                        lightbox experience, allowing users to easily view larger versions of images,
-                                        navigate through galleries using arrows or swiping, and close the overlay
-                                        smoothly.
-                                    </li>
-                                </ul>
-                                <h5 class="more-info-subtitle">Styling Consistency & Efficiency:
-                                </h5>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <b>Challenge:</b> Achieving a consistent, clean, and professional design
-                                        aesthetic that complements the photography without requiring extensive custom
-                                        CSS.
-                                    </li>
-                                    <li>
-                                        <b>Solution:</b> Leveraged Tailwind CSS's utility-first approach for rapid
-                                        styling, ensuring consistent spacing, typography (with Google Fonts), and color
-                                        schemes throughout the portfolio. This reduced the need for large CSS files and
-                                        sped up development.
-                                    </li>
-                                </ul>
-
-
-                            </div>
                             <div class="prev-and-next-btn">
-                                <a href="/project-details/{{ next_project | default('#') }}" class="btn btn-next">
+                                <a
+                                    href="/project-details/{{ next_project | default('#') }}"
+                                    class="btn btn-next">
                                     Next
                                 </a>
-                                <a href="/project-details/{{ previous_project | default('#') }}" class="btn btn-prev">
+                                <a
+                                    href="/project-details/{{ previous_project | default('#') }}"
+                                    class="btn btn-prev">
                                     Previous
                                 </a>
-                            </div>
-                        </div>
-
-                        <div class="work-together-slider">
-                            <div class="slider-main d-flex gap-4 align-items-center">
-                                <div class="slider-item">
-                                    <a href="/contact">Let's 👋 Work Together</a>
-                                    <a href="/contact">Let's 👋 Work Together</a>
-                                </div>
-                                <div class="slider-item">
-                                    <a href="/contact">Let's 👋 Work Together</a>
-                                    <a href="/contact">Let's 👋 Work Together</a>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 

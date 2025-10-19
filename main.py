@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Annotated
 from fastapi import FastAPI, Form, Request
 from fastapi.staticfiles import StaticFiles
@@ -21,6 +22,7 @@ if not BOT_TOKEN or not CHAT_ID:
     raise ValueError("BOT_TOKEN and CHAT_ID must be set in environment variables.")
 
 templates = Jinja2Templates(directory="templates")
+templates.env.globals["now"] = datetime.now()
 
 
 @app.exception_handler(RateLimitExceeded)
@@ -31,11 +33,6 @@ async def rate_limit_handler():
 @app.get("/")
 async def index():
     return templates.TemplateResponse("index.html", {"request": {}, "active_page": "home"})
-
-
-@app.get("/services")
-async def services():
-    return templates.TemplateResponse("services.html", {"request": {}, "active_page": "services"})
 
 
 @app.get("/contact")

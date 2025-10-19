@@ -4,14 +4,14 @@
 
 {% block content %}
 
-<section class="content-box-area mt-4">
+<section class="mt-4 content-box-area">
     <div class="container">
         <div class="row g-4">
             <div class="col-xl-4">
                 {%include 'profileblock.html' %}
             </div>
             <div class="col-xl-8">
-                <div class="card content-box-card">
+                <div class="content-box-card card">
                     <div class="card-body portfolio-card">
                         <div class="portfolio-details-area">
                             <div class="main-image">
@@ -33,7 +33,7 @@
                                     <div class="info-item">
                                         <div class="image-item">
                                             <img src="../assets/img/projects/2/3.webp"
-                                                alt="Campus Scheduler Class Diagram Snippet" class="img-fluid w-100">
+                                                alt="Campus Scheduler Class Diagram Snippet" class="w-100 img-fluid">
                                             <a href="../assets/img/projects/2/2.webp"
                                                 class="gallery-popup full-image-preview parent-container">
 
@@ -47,122 +47,27 @@
                                     <h4 class="card-title">Overview</h4>
                                     <p>Campus Scheduler is a web-based platform designed to help businesses,
                                         particularly Small to Medium Enterprises (SMEs), Startups, and Tech companies,
-                                        manage their workflows effectively through a role-based interface (Admin,
-                                        Manager, Worker). Hosted on Railway, it facilitates project management, event
+                                        manage their workflows effectively through a role-based interface (<i>Admin,
+                                        Manager, Worker</i> ). Hosted on Railway, it simplifies project management, event
                                         scheduling, task assignment, and team communication.</p>
                                     <p>Users can register directly or sign in using Google Authentication. The system
-                                        leverages a PostgreSQL database for robust data storage and utilizes a tech
+                                        uses a PostgreSQL database for robust data storage and utilizes a tech
                                         stack chosen for rapid development and flexibility:
+                                    </br>
+                                    </br>
                                         <b>Frontend:</b> HTML, CSS, JavaScript.
-                                        <b>Backend:</b> Python (Flask) and potentially Java, using REST APIs.
+                                        </br>
+                                        <b>Backend:</b> Python (Flask), using REST APIs.
+                                        </br>
                                         <b>Database:</b> PostgreSQL.
+                                        </br>
                                     </p>
                                     <p>The platform aims to provide a cost-effective solution, initially free, with
-                                        potential for a future subscription model. It emphasizes rapid, iterative
-                                        development using the RAD model to quickly adapt to client needs.</p>
+                                        potential for a future subscription model. It was made with learning in mind.</p>
                                 </div>
                             </div>
                             <div class="inner-images">
-
-
-                                <div class="more-info-block">
-                                    <h3 class="more-info-title">Key Features & Functionality</h3>
-                                    <p>The platform offers a range of features tailored to improve organizational
-                                        efficiency:</p>
-                                    <ul>
-                                        <li><b>User Management:</b> Secure registration, login (including Google
-                                            Sign-In),
-                                            and role assignment (Admin, Manager, Worker).</li>
-                                        <li><b>Project & Task Management:</b> Managers can create projects, define
-                                            tasks,
-                                            assign them to workers, set deadlines, and track progress. Workers can view,
-                                            update, and complete assigned tasks.</li>
-                                        <li><b>Scheduling & Calendars:</b> Personal task calendars for employees and
-                                            team
-                                            task calendars for managers. Event creation and scheduling capabilities.
-                                        </li>
-                                        <li><b>Communication:</b> Real-time, role-aware messaging between colleagues and
-                                            team leaders.</li>
-                                        <li><b>Dashboards & Visualization:</b> Role-based dashboards displaying relevant
-                                            information (projects, tasks, team info). A project dependency graph
-                                            visualizes
-                                            task connections.</li>
-                                        <li><b>Data Privacy:</b> GDPR compliant data handling with options for users to
-                                            request data deletion.</li>
-                                    </ul>
-
-                                    <h3 class="more-info-title">Challenges & Technical Considerations</h3>
-                                    <p>Building Campus Scheduler involves addressing several technical and
-                                        non-functional
-                                        requirements to ensure a robust, secure, and user-friendly platform.</p>
-
-                                    <h5 class="more-info-subtitle">Scalability and Performance:</h5>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <b>Challenge:</b> Ensuring the system handles concurrent users (target:
-                                            100+)
-                                            without performance degradation, especially for features like the real-time
-                                            graph rendering (target: < 1s) and achieving high Google PageSpeed scores
-                                                (target: 90+). </li>
-                                        <li>
-                                            <b>Solution:</b> Utilizing efficient backend frameworks (Flask), optimizing
-                                            PostgreSQL queries, implementing caching where appropriate, asynchronous
-                                            task
-                                            handling for heavy operations, and frontend performance optimizations. Load
-                                            testing will be crucial.
-                                        </li>
-                                    </ul>
-                                    <h5 class="more-info-subtitle">Security and Data Integrity:
-                                    </h5>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <b>Challenge:</b> Protecting user data, ensuring secure authentication,
-                                            preventing common web vulnerabilities, and guaranteeing data availability.
-                                        </li>
-                                        <li>
-                                            <b>Solution:</b> Implementing HTTPS (SSL/TLS), OAuth 2.0 for Google Sign-In,
-                                            secure password hashing, input validation to prevent SQL injection/XSS,
-                                            regular
-                                            database backups (NFR5), and adhering to GDPR principles for data handling.
-                                        </li>
-                                    </ul>
-
-                                    <h5 class="more-info-subtitle">User Experience (UX) and Responsiveness:
-                                    </h5>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <b>Challenge:</b> Creating an intuitive interface that works seamlessly
-                                            across
-                                            desktop and mobile devices (NFR3), managing complexity arising from
-                                            different
-                                            user roles and features.
-                                        </li>
-                                        <li>
-                                            <b>Solution:</b> Employing responsive web design principles (HTML/CSS/JS),
-                                            designing clear role-based dashboards and navigation, usability testing, and
-                                            leveraging Flask templates for dynamic content rendering.
-                                        </li>
-                                    </ul>
-                                    <h5 class="more-info-subtitle">Rapid Development (RAD) Management:
-                                    </h5>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <b>Challenge:</b> Balancing the speed of the RAD model with the need for
-                                            code
-                                            quality, maintainability, and thorough testing, especially with a
-                                            potentially
-                                            distributed team.
-                                        </li>
-                                        <li>
-                                            <b>Solution:</b> Establishing clear coding standards, using version control
-                                            (e.g., Git), implementing unit and integration tests, regular code reviews,
-                                            and
-                                            maintaining clear communication channels within the team.
-                                        </li>
-                                    </ul>
-
-
-                                </div>
+                                   
                                 <div class="prev-and-next-btn">
                                     <a href="/project-details/{{ next_project | default('#') }}" class="btn btn-next">
                                         Next
@@ -171,19 +76,6 @@
                                         class="btn btn-prev">
                                         Previous
                                     </a>
-                                </div>
-                            </div>
-
-                            <div class="work-together-slider">
-                                <div class="slider-main d-flex gap-4 align-items-center">
-                                    <div class="slider-item">
-                                        <a href="/contact">Let's 👋 Work Together</a>
-                                        <a href="/contact">Let's 👋 Work Together</a>
-                                    </div>
-                                    <div class="slider-item">
-                                        <a href="/contact">Let's 👋 Work Together</a>
-                                        <a href="/contact">Let's 👋 Work Together</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

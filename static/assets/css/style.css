@@ -200,6 +200,13 @@ p {
 	stroke: var(--primary);
 }
 
+.dark-theme .subtitle {
+	color: var(--dark-theme-light-white)
+}
+
+.experience-header {
+	margin-bottom: 1.5rem;
+}
 
 .header-area {
 	width: 100%;
