@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, time
 from typing import Annotated
 from fastapi import FastAPI, Form, Request
 from fastapi.staticfiles import StaticFiles
@@ -23,6 +23,22 @@ if not BOT_TOKEN or not CHAT_ID:
 
 templates = Jinja2Templates(directory="templates")
 templates.env.globals["now"] = datetime.now()
+
+
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    start_time = time.perf_counter()
+    response = await call_next(request)
+    process_time = time.perf_counter() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    return response
+
+
+@app.middleware("http")
+async def block_indexing_middleware(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Robots-Tag"] = "noindex, nofollow"
+    return response
 
 
 @app.exception_handler(RateLimitExceeded)
