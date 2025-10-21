@@ -19,14 +19,14 @@ contactForm.addEventListener("submit", async function (e) {
             method: "POST",
             body: formData,
         });
-
-        if (response.ok) {
+        respJson = await response.json();
+        if (respJson.ok) {
             feedbackMessage.style.color = "green";
             feedbackMessage.textContent = "Message sent successfully";
             contactForm.reset();
         } else {
             feedbackMessage.style.color = "red";
-            feedbackMessage.textContent = "An error occurred";
+            feedbackMessage.textContent = respJson.error || "An error occurred";
         }
     } catch (err) {
         console.error(err);

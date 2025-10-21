@@ -5,16 +5,18 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import PlainTextResponse
 from models import ContactForm
 from os import getenv
-from rate_limiter import limiter
 from slowapi.errors import RateLimitExceeded
 from fastapi.templating import Jinja2Templates
-
+from utils import is_spam
+import logging
 import os
 import httpx
 import time
 
 app = FastAPI(openapi_url=None, docs_url=None, redoc_url=None)
-app.state.limiter = limiter
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 BOT_TOKEN = getenv("BOT_TOKEN")
 CHAT_ID = getenv("CHAT_ID")
@@ -83,13 +85,16 @@ async def project_details(request: Request, project_id: int):
 
 
 @app.post("/contact")
-@limiter.limit("5/minute")
 async def contact(request: Request, data: Annotated[ContactForm, Form()]):
+
+    if is_spam(data.message):
+        logger.info("Spam detected in contact form submission. Message:\n%s", data.message)
+        return {"ok": False, "error": "I don't want spam."}
 
     telegram_api_url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
     telegram_message = f"""
-`
+`   
     New contact form submission:
 
     Name: {data.name}
@@ -108,8 +113,12 @@ async def contact(request: Request, data: Annotated[ContactForm, Form()]):
             },
         )
     if response.status_code != 200:
+        logger.error(
+            "Failed to send message to Telegram. Status code: %s, Response: %s", response.status_code, response.text
+        )
         return {"ok": False, "error": "Failed to send message."}
 
+    logger.info("Message sent to Telegram successfully.")
     return {"ok": True, "message": "Message sent successfully."}
 
 
